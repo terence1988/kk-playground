@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Quick!</title>
+    <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
+  </head>
+  <body style="display: flex; flex-direction: column">
+    <textarea
+      class="output"
+      name="TypeQuick"
+      id="typeQuick"
+      cols="30"
+      rows="20"
+    ></textarea>
+    <button id="start">Start Recording</button>
+    <button id="stop" disabled>Stop Recording</button>
+  </body>
+  <script>
+    const SpeechRecognition =
+      window.SpeechRecognition || webkitSpeechRecognition;
+    const SpeechGrammarList =
+      window.SpeechGrammarList || webkitSpeechGrammarList;
+    const SpeechRecognitionEvent =
+      window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+    const grammar = "#JSGF V1.0; grammar colors; ";
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+
+    const outputTextarea = document.querySelector(".output");
+    const startButton = document.querySelector("#start");
+    const stopButton = document.querySelector("#stop");
+
+    startButton.onclick = function () {
+      recognition.start();
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      console.log("Ready to receive audio.");
+    };
+
+    stopButton.onclick = function () {
+      recognition.stop();
+      startButton.disabled = false;
+      stopButton.disabled = true;
+      console.log("Stopped to receive audio.");
+    };
+
+    recognition.onresult = function (event) {
+      var description = event.results[0][0].transcript;
+
+      outputTextarea.textContent = description;
+      console.log("Text generated");
+    };
+  </script>
+</html>
