@@ -73,7 +73,7 @@
       console.log("Stopped to receive audio.");
     };
 
-    recognition.onresult = function (event) {
+    recognition.onaudioend = function (event) {
       var description = event.results[0][0].transcript;
       outputTextarea.textContent =
         "No sound detected but it worked" + description;
