@@ -74,6 +74,12 @@
     };
 
     recognition.onaudioend = function (event) {
+      outputTextarea.textContent = "No sound detected but it worked";
+      CustomElement.setValue(outputTextarea.textContent);
+      console.log("No sound detected but it worked");
+    };
+
+    recognition.onresult = function (event) {
       var description = event.results[0][0].transcript;
       outputTextarea.textContent =
         "No sound detected but it worked" + description;
