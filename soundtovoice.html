@@ -19,6 +19,28 @@
     <button id="stop" disabled>Stop Recording</button>
   </body>
   <script>
+    function initCustomElement() {
+      try {
+        CustomElement.init((element, _context) => {
+          // Sets up editor with initial value, state (whether disabled) , and configuration options
+          if (element.hasOwnProperty("value")) {
+            outputTextarea.textContent = element.value;
+          }
+          console.log("Custom element initialized");
+        });
+
+        // Reacts to changes in disabling (e.g., when publishing the item)
+        CustomElement.onDisabledChanged((element, _context) => {
+          console.log("Custom element disabled");
+        });
+      } catch (err) {
+        // Sends message to console and editor if initialization failed (for example, the page is displayed outside the Kontent UI)
+        console.error(err);
+      }
+    }
+
+    initCustomElement();
+
     const SpeechRecognition =
       window.SpeechRecognition || webkitSpeechRecognition;
     const SpeechGrammarList =
@@ -55,30 +77,8 @@
       var description = event.results[0][0].transcript;
       outputTextarea.textContent =
         "No sound detected but it worked" + description;
+      CustomElement.setValue(outputTextarea.textContent);
       console.log("Text generated");
     };
-
-    function initCustomElement() {
-      try {
-        CustomElement.init((element, _context) => {
-          // Sets up editor with initial value, state (whether disabled) , and configuration options
-          if (element.hasOwnProperty("value")) {
-            outputTextarea.textContent = element.value;
-          }
-          console.log("Custom element initialized");
-        });
-
-        // Reacts to changes in disabling (e.g., when publishing the item)
-        CustomElement.onDisabledChanged((element, _context) => {
-          element.setValue(outputTextarea.textContent);
-          console.log("Custom element disabled");
-        });
-      } catch (err) {
-        // Sends message to console and editor if initialization failed (for example, the page is displayed outside the Kontent UI)
-        console.error(err);
-      }
-    }
-
-    initCustomElement();
   </script>
 </html>
