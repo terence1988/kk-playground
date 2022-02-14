@@ -69,7 +69,10 @@
         });
 
         // Reacts to changes in disabling (e.g., when publishing the item)
-        //CustomElement.onDisabledChanged(updateDisabled);
+        CustomElement.onDisabledChanged((element, _context) => {
+          element.setValue(outputTextarea.textContent);
+          console.log("Custom element disabled");
+        });
       } catch (err) {
         // Sends message to console and editor if initialization failed (for example, the page is displayed outside the Kontent UI)
         console.error(err);
