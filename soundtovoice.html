@@ -62,7 +62,7 @@
       try {
         CustomElement.init((element, _context) => {
           // Sets up editor with initial value, state (whether disabled) , and configuration options
-          if (element.hasAttribute("value")) {
+          if (element.hasOwnProperty("value")) {
             outputTextarea.textContent = element.getAttribute("value");
           }
           console.log("Custom element initialized");
