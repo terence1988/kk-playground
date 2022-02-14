@@ -19,7 +19,8 @@
     <button id="stop" disabled>Stop Recording</button>
   </body>
   <script>
-    CustomElement.init((element, _context) => {
+    const window = window || {};
+    CustomElement.init((element, _context,window) => {
       console.log("Custom element initialized");
       const SpeechRecognition =
         window.SpeechRecognition || webkitSpeechRecognition;
@@ -41,7 +42,7 @@
         recognition.start();
         startButton.disabled = true;
         stopButton.disabled = false;
-        outputTextarea.textContent = "Ready to receive audio.";
+        element.setValue("Ready to receive audio.");
         console.log("Ready to receive audio.");
       };
 
