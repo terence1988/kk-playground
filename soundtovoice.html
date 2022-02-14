@@ -19,9 +19,8 @@
     <button id="stop" disabled>Stop Recording</button>
   </body>
   <script>
-    CustomElement.init((element,_context) => {
+    CustomElement.init((element, _context) => {
       console.log("Custom element initialized");
-      console.log(element)
       const SpeechRecognition =
         window.SpeechRecognition || webkitSpeechRecognition;
       const SpeechGrammarList =
@@ -42,6 +41,7 @@
         recognition.start();
         startButton.disabled = true;
         stopButton.disabled = false;
+        outputTextarea.textContent = "Ready to receive audio.";
         console.log("Ready to receive audio.");
       };
 
@@ -49,13 +49,14 @@
         recognition.stop();
         startButton.disabled = false;
         stopButton.disabled = true;
+        outputTextarea.textContent = "Stopped to receive audio.";
         console.log("Stopped to receive audio.");
       };
 
       recognition.onresult = function (event) {
         var description = event.results[0][0].transcript;
-        outputTextarea.textContent = description;
-        outputTextarea.textContent += "No sound detected but it worked";
+        outputTextarea.textContent =
+          "No sound detected but it worked" + description;
         console.log("Text generated");
       };
     });
