@@ -34,8 +34,8 @@
     }
 
     initCustomElement();
-    
-    if (!SpeechRecognition in window && !webkitSpeechRecognition in window) {
+
+    if (!window.hasOwnProperty("SpeechRecognition") && !window.hasOwnProperty("webkitSpeechRecognition")) {
       console.log("Speech Recognition not supported");
     }
 
