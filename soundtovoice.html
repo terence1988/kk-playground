@@ -8,12 +8,7 @@
     <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   </head>
   <body style="display: flex; flex-direction: column">
-    <textarea
-      class="output"
-      id="typeQuick"
-      cols="30"
-      rows="20"
-    ></textarea>
+    <textarea class="output" id="typeQuick" cols="30" rows="20"></textarea>
     <button id="start">Start Recording</button>
     <button id="stop" disabled>Stop Recording</button>
   </body>
@@ -39,6 +34,10 @@
     }
 
     initCustomElement();
+    
+    if (!SpeechRecognition in window && !webkitSpeechRecognition in window) {
+      console.log("Speech Recognition not supported");
+    }
 
     const SpeechRecognition =
       window.SpeechRecognition || webkitSpeechRecognition;
@@ -57,7 +56,7 @@
     const stopButton = document.querySelector("#stop");
 
     let textareaId = Math.floor(1000 + Math.random() * 9000);
-    outputTextarea.setAttribute("name",textareaId)
+    outputTextarea.setAttribute("name", textareaId);
 
     startButton.onclick = function () {
       recognition.start();
