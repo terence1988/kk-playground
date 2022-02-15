@@ -8,7 +8,12 @@
 </head>
 <body>
     <h1>An Text Area</h1>
-    <iframe 1 src ="soundtovoice.html" linkTarget = "iframe2" style="width: 50vw;height: 50vh;">
+    <iframe 1 id="theFrame" src ="soundtovoice.html" linkTarget = "iframe2" style="width: 50vw;height: 50vh;" name="">
     <iframe2>
 </body>
+<script>
+    const theFrame = document.querySelector("#theFrame");
+    let identifier = Math.floor(1000 + Math.random() * 9000);
+    theFrame.setAttribute("name", identifier)
+</script>
 </html>
