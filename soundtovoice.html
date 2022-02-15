@@ -10,7 +10,6 @@
   <body style="display: flex; flex-direction: column">
     <textarea
       class="output"
-      name="TypeQuick"
       id="typeQuick"
       cols="30"
       rows="20"
@@ -56,6 +55,9 @@
     const outputTextarea = document.querySelector(".output");
     const startButton = document.querySelector("#start");
     const stopButton = document.querySelector("#stop");
+
+    let textareaId = Math.floor(1000 + Math.random() * 9000);
+    outputTextarea.setAttribute("name",textareaId)
 
     startButton.onclick = function () {
       recognition.start();
