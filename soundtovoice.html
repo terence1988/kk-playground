@@ -13,6 +13,12 @@
     <button id="stop" disabled>Stop Recording</button>
   </body>
   <script>
+    function updateSize() {
+      // Updates the custom element height in the Kontent UI
+      const height = Math.ceil($("html").height());
+      CustomElement.setHeight(height);
+    }
+
     function initCustomElement() {
       try {
         CustomElement.init((element, _context) => {
@@ -22,6 +28,8 @@
           }
           console.log("Custom element initialized");
         });
+
+        updateSize();
 
         // Reacts to changes in disabling (e.g., when publishing the item)
         CustomElement.onDisabledChanged((element, _context) => {
@@ -35,7 +43,10 @@
 
     initCustomElement();
 
-    if (!window.hasOwnProperty("SpeechRecognition") && !window.hasOwnProperty("webkitSpeechRecognition")) {
+    if (
+      !window.hasOwnProperty("SpeechRecognition") &&
+      !window.hasOwnProperty("webkitSpeechRecognition")
+    ) {
       console.log("Speech Recognition not supported");
     }
 
@@ -58,7 +69,7 @@
     let textareaId = Math.floor(1000 + Math.random() * 9000);
     outputTextarea.setAttribute("name", textareaId);
 
-    recognition.onaudiostart = function(event) {
+    recognition.onaudiostart = function (event) {
       console.log("SpeechRecognition.onaudiostart");
     };
 
@@ -91,7 +102,5 @@
       outputTextarea.textContent = "Stopped to receive audio.";
       console.log("Stopped to receive audio.");
     };
-
-
   </script>
 </html>
