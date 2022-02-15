@@ -7,17 +7,18 @@
     <title>Type Quick!</title>
     <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   </head>
-  <body style="display: flex; flex-direction: column;">
+  <body style="display: flex; flex-direction: column">
     <textarea class="output" id="typeQuick" cols="30" rows="20"></textarea>
     <button id="start">Start Recording</button>
     <button id="stop" disabled>Stop Recording</button>
   </body>
   <script>
+    
     function updateSize() {
       // Updates the custom element height in the Kontent UI
-      const height = Math.ceil(document.querySelector("").clientHeight);
+      const height = window.parent.document.body.clientHeight;
       console.log(height);
-      CustomElement.setHeight(height);
+      CustomElement.setHeight(height + 60);
     }
 
     function initCustomElement() {
@@ -28,7 +29,6 @@
             outputTextarea.textContent = element.value;
           }
           console.log("Custom element initialized");
-         
         });
         // Reacts to changes in disabling (e.g., when publishing the item)
         CustomElement.onDisabledChanged((element, _context) => {
