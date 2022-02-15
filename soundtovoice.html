@@ -58,6 +58,24 @@
     let textareaId = Math.floor(1000 + Math.random() * 9000);
     outputTextarea.setAttribute("name", textareaId);
 
+    recognition.onaudiostart = function(event) {
+      console.log("SpeechRecognition.onaudiostart");
+    };
+
+    recognition.onaudioend = function (event) {
+      outputTextarea.textContent = "No sound detected but it worked";
+      CustomElement.setValue(outputTextarea.textContent);
+      console.log("No sound detected but it worked");
+    };
+
+    recognition.onresult = function (event) {
+      var description = event.results[0][0].transcript;
+      outputTextarea.textContent =
+        "No sound detected but it worked" + description;
+      CustomElement.setValue(outputTextarea.textContent);
+      console.log("Text generated");
+    };
+
     startButton.onclick = function () {
       recognition.start();
       startButton.disabled = true;
@@ -74,18 +92,6 @@
       console.log("Stopped to receive audio.");
     };
 
-    recognition.onaudioend = function (event) {
-      outputTextarea.textContent = "No sound detected but it worked";
-      CustomElement.setValue(outputTextarea.textContent);
-      console.log("No sound detected but it worked");
-    };
 
-    recognition.onresult = function (event) {
-      var description = event.results[0][0].transcript;
-      outputTextarea.textContent =
-        "No sound detected but it worked" + description;
-      CustomElement.setValue(outputTextarea.textContent);
-      console.log("Text generated");
-    };
   </script>
 </html>
