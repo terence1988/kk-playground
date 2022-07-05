@@ -24,5 +24,12 @@
     const pageIframe = document.getElementById("the-frame");
     let iframeId = Math.floor(1000 + Math.random() * 9000);
     pageIframe.setAttribute("name", iframeId);
+    const stringValue = "قالت السلطات الأمريكية إن الرجل الذي يشتبه في أنه قتل 10 أشخاص في سوبر ماركت في منطقة بافالو في نيويورك، سعى عمداً إلى موقع فيه عدد كبير من الأشخاص السود.";
+    const pageString = document.createElement("p");
+    pageString.innerHTML = stringValue;
+    pageString.setAttribute("lang", "ar");
+    pageString.setAttribute("dir", "ltr");
+    pageString.setAttribute("style", "font-size: 1.5em;");
+    document.body.appendChild(pageString);
   </script>
 </html>
