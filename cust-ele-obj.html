@@ -14,7 +14,7 @@
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   <script>
     function callbackSetValue(ele, ctx) {
-        CustomElement.setValue({...ele,...ctx});
+        console.log(ele, ctx);
     }
     CustomElement.init((element, context) => callbackSetValue(element, context));
   </script>
