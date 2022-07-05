@@ -1,1 +1,4 @@
-*.txt
+# Local Netlify folder
+.netlify
+#VS code config
+.vscode

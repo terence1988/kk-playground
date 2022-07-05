@@ -13,9 +13,9 @@
   <body id="root"></body>
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   <script>
-    function callbackObjects(ele, ctx) {
-      console.log("callbackObjects", ele, ctx);
+    function callbackSetValue(ele, ctx) {
+        CustomElement.setValue({...ele,...ctx});
     }
-    CustomElement.init((element, context) => callbackObjects(element, context));
+    CustomElement.init((element, context) => callbackSetValue(element, context));
   </script>
 </html>
