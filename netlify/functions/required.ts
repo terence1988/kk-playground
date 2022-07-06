@@ -5,7 +5,7 @@ import { ManagementClient } from "@kentico/kontent-management";
 const handler: Handler = async (event, context) => {
   // Create a new instance of the client
   let projectId = "";
-  let projectKey= "";
+  let projectKey = "";
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -19,12 +19,35 @@ const handler: Handler = async (event, context) => {
     };
   }
 
-  if (body["projectId"]) {
-    projectId = body.projectId;
-    projectKey = projectId.split("-").join("_");
+  if (!body["projectId"] || !body["itemId"]) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "No project id or item id or key found",
+      }),
+    };
   }
 
-  //const client = new ManagementClient({});
+  projectId = body.projectId;
+  projectKey = projectId.split("-").join("_");
+
+  if (!process.env[projectKey]) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "No project id or item id or key found",
+      }),
+    };
+  }
+
+  const client = new ManagementClient({
+    projectId: projectId,
+    apiKey: process.env[projectKey] as string,
+  });
+   
+  const isRequired = client.viewContentItem().byItemId(body.itemId).toPromise().then(res=> {
+    return res.data;
+  });
 
   return {
     statusCode: 200,
