@@ -15,3 +15,6 @@ export { handler };
 
 // Endpoint
 // https://site-name.netlify.app/functions/required
+
+//- Removing your Function's "package.json" and adding the dependencies to the project's top-level "package.json" instead. 
+//This is the fastest and safest solution.
