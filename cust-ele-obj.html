@@ -14,12 +14,21 @@
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@kentico/kontent-management/_bundles/kontent-management.umd.min.js"></script>
   <script>
+    var ele_note = {};
+    var ctx_note = {};
+
     function callbackSetValue(ele, ctx) {
-      console.log(ele, ctx);
+      ele_note = { ...ele };
+      ctx_note = { ...ctx };
+      console.log('initialized element');
     }
 
     CustomElement.init((element, context) => {
       callbackSetValue(element, context);
     });
+
+    CustomElementCustomElement.getItemDetails(ctx_note.item.id).then((res) =>
+      console.log(res)
+    );
   </script>
 </html>
