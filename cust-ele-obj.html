@@ -26,9 +26,10 @@
     CustomElement.init((element, context) => {
       callbackSetValue(element, context);
     });
+    console.log(ctx_note)
 
-    CustomElement.getItemDetails(ctx_note.item.id).then((res) =>
-      console.log(res)
-    );
+    // CustomElement.getItemDetails(ctx_note.item.id).then((res) =>
+    //   console.log(res)
+    // );
   </script>
 </html>
