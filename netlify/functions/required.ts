@@ -5,6 +5,7 @@ import { ManagementClient } from "@kentico/kontent-management";
 const handler: Handler = async (event, context) => {
   // Create a new instance of the client
   let projectId = "";
+  let projectKey= "";
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -20,10 +21,8 @@ const handler: Handler = async (event, context) => {
 
   if (body["projectId"]) {
     projectId = body.projectId;
+    projectKey = projectId.split("-").join("_");
   }
-
-  const projectKey = projectId.split("-").join("_");
-  console.log(process?.env[projectKey]);
 
   //const client = new ManagementClient({});
 
