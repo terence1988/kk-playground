@@ -2,3 +2,5 @@
 .netlify
 #VS code config
 .vscode
+#node
+node_modules
