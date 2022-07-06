@@ -1,14 +1,16 @@
 import { Handler } from "@netlify/functions";
-import fetch from 'node-fetch';
-import {ManagementClient} from '@kentico/kontent-management'
+import fetch from "node-fetch";
+import { ManagementClient } from "@kentico/kontent-management";
 
 const handler: Handler = async (event, context) => {
-  const projectId = context?.clientContext?.projectId;
-  console.log(projectId);
   //const client = new ManagementClient({});  // Create a new instance of the client
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
+  const body = JSON.parse(event.body || "");
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: "Hello World" }),
+    body: JSON.stringify({ message: body }),
   };
 };
 
