@@ -45,9 +45,12 @@ const handler: Handler = async (event, context) => {
     apiKey: process.env[projectKey] as string,
   });
    
-  const isRequired = client.viewContentItem().byItemId(body.itemId).toPromise().then(res=> {
-    return res.data;
+  const itemtypeId = client.viewContentItem().byItemId(body.itemId).toPromise().then(res=> {
+    return res.data.type.id;
   });
+  const isRequired = client.viewContentType().byId(itemtypeId).toPromise().then(res=> {
+    return res.data.elements.find(e=> e.id === body.elementId).is_required;
+  })
 
   return {
     statusCode: 200,

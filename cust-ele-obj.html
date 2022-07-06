@@ -14,16 +14,14 @@
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@kentico/kontent-management/_bundles/kontent-management.umd.min.js"></script>
   <script>
-
-
     CustomElement.init((element, context) => {
       // looks like they only existed in this scope
-      console.log(element.item);
+      Object.assign(window,context);
     });
-   
 
     // CustomElement.getItemDetails(ctx_note.item.id).then((res) =>
     //   console.log(res)
     // );
+    // Each method is actually an API call to KK so the logic needs to be handled in the code
   </script>
 </html>
