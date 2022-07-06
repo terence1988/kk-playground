@@ -8,3 +8,6 @@ const handler: Handler = async (event, context) => {
 };
 
 export { handler };
+
+// Endpoint
+// https://site-name.netlify.app/functions/required

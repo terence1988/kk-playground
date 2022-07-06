@@ -17,6 +17,11 @@
     function callbackSetValue(ele, ctx) {
       console.log(ele, ctx);
     }
+    
+    fetch("/functions/required")
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+
     CustomElement.init((element, context) =>
       callbackSetValue(element, context)
     );
