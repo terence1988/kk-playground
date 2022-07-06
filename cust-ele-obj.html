@@ -14,18 +14,19 @@
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@kentico/kontent-management/_bundles/kontent-management.umd.min.js"></script>
   <script>
-
     function callbackSetValue(ele, ctx) {
       console.log(ele, ctx);
     }
 
-
-
-    CustomElement.init((element, context) =>
-    fetch("/functions/required",{method:"POST",body:JSON.stringify({ProjectId:context.ProjectId})})
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-      callbackSetValue(element, context)
-    );
+    CustomElement.init((element, context) => {
+      fetch("/functions/required", {
+        method: "POST",
+        body: JSON.stringify({ ProjectId: context.ProjectId }),
+      })
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+        
+      callbackSetValue(element, context);
+    });
   </script>
 </html>
