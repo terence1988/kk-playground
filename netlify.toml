@@ -1,4 +1,11 @@
 # example netlify.toml
+[functions]
+
+  # Flags "package-1" as an external node module for all functions.
+  # external_node_modules = ["node-fetch]
+
+  # Includes all Markdown files inside the "files/" directory.
+  included_files = ["files/*.md"]
 [build]
   command = "# no build command"
   functions = "netlify/functions"
