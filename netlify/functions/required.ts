@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { ManagementClient } from "@kentico/kontent-management";
 
 const handler: Handler = async (event, context) => {
-   // Create a new instance of the client
+  // Create a new instance of the client
   let projectId = "";
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
@@ -18,18 +18,21 @@ const handler: Handler = async (event, context) => {
     };
   }
 
-  if (body.hasProperty("projectId")) {
+  if (body["projectId"]) {
     projectId = body.projectId;
   }
 
-  const projectKey=projectId.split("-").join("_");
+  const projectKey = projectId.split("-").join("_");
   console.log(process?.env[projectKey]);
 
-  //const client = new ManagementClient({}); 
+  //const client = new ManagementClient({});
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: body }),
+    body: JSON.stringify({
+      processKey: process?.env[projectKey],
+      projectKey: projectKey,
+    }),
   };
 };
 
