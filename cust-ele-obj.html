@@ -18,7 +18,7 @@
       console.log(element);
       console.log(context);
     });
-    fetch(`/functions/required`)
+    fetch(`/.netlify/functions/required`)
       .then((response) => response.json())
       .then((resData) => console.log(resData));
     // CustomElement.getItemDetails(ctx_note.item.id).then((res) =>
