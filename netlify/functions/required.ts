@@ -40,18 +40,6 @@ const handler: Handler = async (event, context) => {
     };
   }
 
-  const client = new ManagementClient({
-    projectId: projectId,
-    apiKey: process.env[projectKey] as string,
-  });
-   
-  const itemtypeId = client.viewContentItem().byItemId(body.itemId).toPromise().then(res=> {
-    return res.data.type.id;
-  });
-  const isRequired = client.viewContentType().byId(itemtypeId).toPromise().then(res=> {
-    return res.data.elements.find(e=> e.id === body.elementId).is_required;
-  })
-
   return {
     statusCode: 200,
     body: JSON.stringify({
